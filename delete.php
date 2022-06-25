@@ -11,9 +11,9 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn){
     die("Connection failed: " . mysqli_connect_error());
 }
+$movie = $_POST['deleteMovieId'];
 
-
-$sql= "INSERT INTO `movies`( `title`, `description`, `image`, `category`, `review`, `release_date`, `director`, `major_actors`, `link`) VALUES ('".$_POST['title']."','".$_POST['description']."','".$_POST['image']."','".$_POST['category']."','".$_POST['review']."','".$_POST['release_date']."','".$_POST['director']."','".$_POST['major actors']."','".$_POST['link']."')";
+$sql= "DELETE FROM movies WHERE title='$movie'";
 
 
 echo "<script>window.location.href='index.php';</script>";

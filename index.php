@@ -275,6 +275,11 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                                     <p class="mb-4">Director: <?php echo $row['director'] ?></p>
                                     <p class="mb-4">Major actors: <?php echo $row['major_actors'] ?></p>
                                     <h1><a href="<?php echo $row['link'] ?>">TMDB link</a></h1>
+                                    <form action="delete.php" method="post">
+                                        <input name="deleteMovieId" type="hidden" value="<?php echo $row['title'] ?>">
+                                        <button class="btn btn-primary" data-bs-dismiss="modal">Delete</button>
+                                    </form>
+
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
                                         <i class="fas fa-xmark fa-fw"></i>
                                         Close Window
