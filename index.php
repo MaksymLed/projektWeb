@@ -21,6 +21,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/box.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -142,8 +143,8 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
             </div>
         </section>
 
-        <button  class="btn btn-warning" data-toggle="modal" data-target="#addMovieModal">ADD MOVIE</button>
 
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMovie">Add Movie</button>
 
         <!-- Call to action-->
         <section class="page-section bg-dark text-white">
@@ -289,5 +290,56 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
         }
         }
         ?>
+
+    <!--ADD MOVIE MODAL-->
+        <div class="modal" id="addMovie" tabindex="-1" role="dialog" aria-labelledby="addMovie" aria-hidden= "true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div   class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                        <div class="login-box">
+                            <h2>Add Movie</h2>
+                            <form action="insert.php" method="post">
+                                <div class="user-box">
+                                    <input name="title" type="text" placeholder="title">
+                                    <label>Title</label>
+                                </div>
+                                <div class="user-box">
+                                    <input name="description" type="text" placeholder="description">
+                                    <label>Description</label>
+                                </div>
+                                <div class="user-box">
+                                    <input name="image" type="file" placeholder="image">
+                                    <label>Image</label>
+                                </div>
+                                <div class="user-box">
+                                    <input name="category" type="text" placeholder="category">
+                                    <label>Category</label>
+                                </div>
+                                <div class="user-box">
+                                    <input name="review" type="text" placeholder="review">
+                                    <label>Review</label>
+                                </div>
+                                <div class="user-box">
+                                    <input name="release_date" type="text" placeholder="release_date">
+                                    <label>Release Date</label>
+                                </div>
+                                <div class="user-box">
+                                    <input name="director" type="text" placeholder="director">
+                                    <label>Director</label>
+                                </div>
+                                <div class="user-box">
+                                    <input name="major_actors" type="text" placeholder="major_actors">
+                                    <label>Major Actors</label>
+                                </div>
+                                <div class="user-box">
+                                    <input name="link" type="text" placeholder="link">
+                                    <label>Link</label>
+                                </div>
+                                <button type="submit">Add New Movie</button>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
