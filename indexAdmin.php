@@ -35,7 +35,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <div>
-                    <input type="text" id="myInput" onkeyup="searchBar()" placeholder="Search for title/catergory...">
+                    <input type="text" id="searchInput" onkeyup="searchBar()" placeholder="Search for title/catergory...">
                 </div>
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#portfolio">Movies</a></li>
@@ -62,19 +62,18 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
         </div>
     </header>
 
-
-    <form action="indexAdmin.php" method="post">
-        <label style="color:white" for="sorter">Sort by:</label>
-        <select name="sortBy">
-            <option value="release_date">Release Date</option>
-            <option value="rating">Rating</option>
-        </select>
-        <button type="submit" class="btn btn-primary">Sort</button>
-    </form>
     <section class="page-section portfolio" id="portfolio">
         <div id="container" class="container">
+            <form style="margin-left: 1000px;" action="indexAdmin.php" method="post">
+                <label style="color:white" for="sorter">Sort by:</label>
+                <select name="sortBy">
+                    <option value="release_date">Release Date</option>
+                    <option value="rating">Rating</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Sort</button>
+            </form>
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Movies</h2>
+            <h1 class="page-section-heading text-center text-uppercase text-secondary mb-0">Movies</h1><br>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -82,7 +81,6 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Portfolio Grid Items-->
-
 
             <div class="row justify-content-center">
 
@@ -107,24 +105,28 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                         <div class="col-md-6 col-lg-4 mb-5">
                             <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#<?php echo str_replace(' ', '', $row['title']); ?>">
                                 <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="portfolio-item-caption-content text-center text-white"><?php echo $row['title']; ?><i class="fas fa-plus fa-3x"></i></div>
-
+                                    <h2 class="portfolio-item-caption-content text-center text-white"><?php echo $row['title']; ?><i class="fas fa-plus fa-3x"></i></h2>
                                 </div>
-                                <img class="img-fluid" src="photos/<?php echo $row['image']?>" alt="..." />
-                                <div class="portfolio-item-caption-content text-center text-black"><?php echo $row['category']; ?><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                        </div>
+                                <img style="float:left; width:auto; height:700px; object-fit:cover;" class="img-fluid" src="photos/<?php echo $row['image']?>" alt="..." />
 
-                        <?php
+                            </div>
+                            <h4 style="background-color: #330000" class="portfolio-item-caption-content cat text-center text-white"><?php echo $row['category']; ?> </h4>
+                        </div>
+                <?php
                     }
                 }
                 ?>
             </div>
         </div>
+        <div style="text-align: center;  ">
+        <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMovie">Add Movie</button>
+        </div>
     </section>
+    <script>
 
 
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMovie">Add Movie</button>
+
+    </script>
 
 
     <!-- Contact-->
@@ -132,20 +134,13 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8 col-xl-6 text-center">
-                    <h2 class="mt-0">Let's Get In Touch!</h2>
+                    <h2 style="color:white" class="mt-0">Contact us!</h2>
                     <hr class="divider" />
-                    <p class="text-muted mb-5">Ready to start your next project with us? Send us a messages and we will get back to you as soon as possible!</p>
+
                 </div>
             </div>
             <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
                 <div class="col-lg-6">
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
                     <form id="contactForm" data-sb-form-api-token="API_TOKEN">
                         <!-- Name input-->
                         <div class="form-floating mb-3">
@@ -206,6 +201,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 
+
     <?php
     $query = "SELECT * FROM movies ORDER BY id ASC";
     $result = mysqli_query($connect, $query);
@@ -229,30 +225,33 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                                 <form action="edit.php" method="post">
 
 
-                                    <input type="hidden" name="toEdit" value="<?php echo $row['title']?>">
+                                <input type="hidden" name="toEdit" value="<?php echo $row['title']?>">
 
-                                    <h2 id="txt<?php echo $row['title']?>" onclick="editEl(this.id)" class="portfolio-modal-title text-secondary text-uppercase mb-0"><?php echo $row['title']?></h2>
-                                    <input id="hid<?php echo $row['title']?>" type="hidden" name="newTitle" value="<?php echo $row['title']?>">
+                                <h2 id="txt<?php echo $row['title']?>" onclick="editEl(this.id)" class="portfolio-modal-title text-secondary text-uppercase mb-0"><?php echo $row['title']?></h2>
+                                <input id="hid<?php echo $row['title']?>" type="hidden" name="newTitle" value="<?php echo $row['title']?>">
 
-                                    <img id="txt<?php echo $row['image']?>" onclick="editEl(this.id)" class="img-fluid rounded mb-5" src="photos/<?php echo $row['image']?>" alt="..." />
+                                <img id="img<?php echo $row['image']?>" onclick="editEl(this.id)" class="img-fluid rounded mb-5" src="photos/<?php echo $row['image']?>" alt="..." />
+                                <img id="slide" width="520" height="515">
+                                <iframe width="420" height="315"
+                                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                                </iframe>
+                                <br>
+                                Description:<p id="txt<?php echo $row['description']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['description'] ?></p>
+                                <input id="hid<?php echo $row['description']?>" type="hidden" name="newDesc" value="<?php echo $row['description']?>">
 
-                                    <br>
-                                    Description:<p id="txt<?php echo $row['description']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['description'] ?></p>
-                                    <input id="hid<?php echo $row['description']?>" type="hidden" name="newDesc" value="<?php echo $row['description']?>">
+                                Release date:<p id="txt<?php echo $row['release_date']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['release_date'] ?></p>
+                                <input id="hid<?php echo $row['release_date']?>" type="hidden" name="newRD" value="<?php echo $row['release_date']?>">
 
-                                    Release date:<p id="txt<?php echo $row['release_date']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['release_date'] ?></p>
-                                    <input id="hid<?php echo $row['release_date']?>" type="hidden" name="newRD" value="<?php echo $row['release_date']?>">
+                                Director:<p id="txt<?php echo $row['director']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['director'] ?></p>
+                                <input id="hid<?php echo $row['director']?>" type="hidden" name="newDirector" value="<?php echo $row['director'] ?>">
 
-                                    Director:<p id="txt<?php echo $row['director']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['director'] ?></p>
-                                    <input id="hid<?php echo $row['director']?>" type="hidden" name="newDirector" value="<?php echo $row['director'] ?>">
+                                Major actors:<p id="txt<?php echo $row['major_actors']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['major_actors'] ?></p>
+                                <input id="hid<?php echo $row['major_actors']?>" type="hidden" name="newMA" value="<?php echo $row['major_actors']?>">
 
-                                    Major actors:<p id="txt<?php echo $row['major_actors']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['major_actors'] ?></p>
-                                    <input id="hid<?php echo $row['major_actors']?>" type="hidden" name="newMA" value="<?php echo $row['major_actors']?>">
+                                <h1 id="txt<?php echo $row['link']?>" onclick="editEl(this.id)"><a href="<?php echo $row['link'] ?>">TMDB link</a></h1>
+                                <input id="hid<?php echo $row['link']?>" type="hidden" name="newLink" value="<?php echo $row['link']?>">
 
-                                    <h1 id="txt<?php echo $row['link']?>" onclick="editEl(this.id)"><a href="<?php echo $row['link'] ?>">TMDB link</a></h1>
-                                    <input id="hid<?php echo $row['link']?>" type="hidden" name="newLink" value="<?php echo $row['link']?>">
-
-                                    <button class="btn btn-primary" type="submit">Save changes</button>
+                                <button class="btn btn-primary" type="submit">Save changes</button>
 
                                 </form>
                                 <form action="delete.php" method="post"" >
@@ -316,15 +315,16 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                             <input name="link" type="text" placeholder="link">
                             <label>Link</label>
                         </div>
-                        <button type="submit">Add New Movie</button>
+                        <button class="btn btn-primary" type="submit">Add New Movie</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <?php
-    }else{
-    echo "<h1>Nothing to show here</h1>";
-    }?>
+
 </body>
+<?php
+}else{
+    echo "<h1>Nothing to show here</h1>";
+}?>
 </html>
