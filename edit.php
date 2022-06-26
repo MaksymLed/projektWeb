@@ -25,11 +25,11 @@ $sql= "UPDATE movies SET title='$title', description = '$desc', release_date = '
 
 if (mysqli_query($conn,$sql)) {
     echo "<h1 style='color:green'>Successfully updated the database</h1>";
-    echo "<script>window.location.href='index.php';</script>";
+    echo "<script>window.location.href='indexAdmin.php';</script>";
 }
 else{
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
-echo "<script>window.location.href='index.php';</script>";
+echo "<script>window.location.href='indexAdmin.php';</script>";
 ?>

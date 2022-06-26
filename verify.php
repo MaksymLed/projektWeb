@@ -27,12 +27,17 @@ if($usr=='' || $passw=='')
 $sql= "SELECT * FROM users WHERE username = '$usr' AND passw = '$passw'";
 $result = mysqli_query($conn,$sql);
 $check = mysqli_fetch_array($result);
-if(isset($check)){
-    echo "<script>window.location.href='index.php';</script>";
-}else{
+if(!isset($check)){
     echo "<script>window.location.href='login.php';
     alert('Some of your credentials are wrong.');</script>";
 }
+
+if(isset($check) and $usr=="admin" and $passw=="admin"){
+    echo "<script>window.location.href='indexAdmin.php';</script>";
+}else{
+    echo "<script>window.location.href='indexUser.php';</script>";
+}
+
 
 
 $sql1= "SELECT username FROM users WHERE username = '$usr' AND passw = '$passw'";
