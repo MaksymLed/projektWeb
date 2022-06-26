@@ -13,7 +13,7 @@ if (!$conn){
 }
 
 
-$sql= "INSERT INTO `movies`( `title`, `description`, `image`, `category`, `review`, `release_date`, `director`, `major_actors`, `link`) VALUES ('".$_POST['title']."','".$_POST['description']."','".$_POST['image']."','".$_POST['category']."','".$_POST['review']."','".$_POST['release_date']."','".$_POST['director']."','".$_POST['major actors']."','".$_POST['link']."')";
+$sql= "INSERT INTO `movies`( `title`, `description`, `image`, `category`, `review`, `release_date`, `director`, `major_actors`, `link`, `rating`, `trailer`) VALUES ('".$_POST['title']."','".$_POST['description']."','".$_POST['image']."','".$_POST['category']."','".$_POST['review']."','".$_POST['release_date']."','".$_POST['director']."','".$_POST['major actors']."','".$_POST['link']."','".$_POST['trailerAdd']."','".$_POST['ratingAdd']."')";
 
 
 

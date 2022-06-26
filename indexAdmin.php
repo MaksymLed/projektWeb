@@ -232,9 +232,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
 
                                 <img id="img<?php echo $row['image']?>" onclick="editEl(this.id)" class="img-fluid rounded mb-5" src="photos/<?php echo $row['image']?>" alt="..." />
                                 <img id="slide" width="520" height="515">
-                                <iframe width="420" height="315"
-                                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                </iframe>
+                                    <iframe width="560" height="315" src="<?php echo $row['trailer']?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <br>
                                 Description:<p id="txt<?php echo $row['description']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['description'] ?></p>
                                 <input id="hid<?php echo $row['description']?>" type="hidden" name="newDesc" value="<?php echo $row['description']?>">
@@ -270,7 +268,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
     }
     }
     ?>
-
+    <button onclick="test()">AAAAA</button>
     <!--ADD MOVIE MODAL-->
     <div class="modal" id="addMovie" tabindex="-1" role="dialog" aria-labelledby="addMovie" aria-hidden= "true">
         <div class="modal-dialog modal-xl">
@@ -280,11 +278,11 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                     <h2>Add Movie</h2>
                     <form action="insert.php" method="post">
                         <div class="user-box">
-                            <input name="title" type="text" placeholder="title">
+                            <input name="title" type="text" placeholder="E.g. Dr. House">
                             <label>Title</label>
                         </div>
                         <div class="user-box">
-                            <input name="description" type="text" placeholder="description">
+                            <input name="description" type="text" placeholder="E.g. Thor meets...">
                             <label>Description</label>
                         </div>
                         <div class="user-box">
@@ -292,28 +290,36 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                             <label>Image</label>
                         </div>
                         <div class="user-box">
-                            <input name="category" type="text" placeholder="category">
+                            <input name="category" type="text" placeholder="E.g. Action/Comedy">
                             <label>Category</label>
                         </div>
                         <div class="user-box">
-                            <input name="review" type="text" placeholder="review">
+                            <input name="review" type="text" placeholder="E.g. A fantastic movie...">
                             <label>Review</label>
                         </div>
                         <div class="user-box">
-                            <input name="release_date" type="text" placeholder="release_date">
+                            <input name="release_date" type="text" placeholder="E.g. 01-03-2009">
                             <label>Release Date</label>
                         </div>
                         <div class="user-box">
-                            <input name="director" type="text" placeholder="director">
+                            <input name="director" type="text" placeholder="E.g. Taika Waititi">
                             <label>Director</label>
                         </div>
                         <div class="user-box">
-                            <input name="major_actors" type="text" placeholder="major_actors">
+                            <input name="major_actors" type="text" placeholder="E.g. Brad Pitt, Chris Hemsworth">
                             <label>Major Actors</label>
                         </div>
                         <div class="user-box">
-                            <input name="link" type="text" placeholder="link">
+                            <input name="link" type="text" placeholder="E.g. https://www.imdb.com/title/tt0800369/">
                             <label>Link</label>
+                        </div>
+                        <div class="user-box">
+                            <input name="trailerAdd" type="text" placeholder="E.g. https://www.youtube.com/embed/JVuq8BHIlbQ">
+                            <label>Trailer</label>
+                        </div>
+                        <div class="user-box">
+                            <input name="ratingAdd" type="text" placeholder="E.g. 5">
+                            <label>Rating</label>
                         </div>
                         <button class="btn btn-primary" type="submit">Add New Movie</button>
                     </form>

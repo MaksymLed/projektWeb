@@ -43,13 +43,14 @@ var time = 3000;	// Time Between Switch
 
 images[0] = 'photos/spectre.png';
 images[1] = 'photos/thor.png';
-images[2] = 'photos/tlo.png';
+images[2] = 'photos/tlo.jpg';
 
 // Change Image
 function changeImg(){
     document.getElementById("slide").src = images[i];
 
     // Check If Index Is Under Max
+
     if(i < images.length - 1){
         // Add 1 to Index
         i++;
@@ -64,3 +65,15 @@ function changeImg(){
 
 // Run function when page loads
 window.onload=changeImg;
+
+function test(){
+    alert("img")
+    // Check If Index Is Under Max
+    const elements = document.querySelectorAll(`[id^="img"]`);
+    alert(elements.id)
+    for (let j = 0; j < elements.length; j++) {
+
+        //document.getElementById("img"+elements[j].id.substring(3)).src='photos/spectre.png';
+        alert("img"+elements[j].substring(3))
+    }
+}
