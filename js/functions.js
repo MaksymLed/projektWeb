@@ -17,17 +17,17 @@ function verDelete(){
 }
 
 function searchBar() {
-    var input, filter, container, col, a, a1, i, txtValue, txtValue1;
-    input = document.getElementById("myInput");
+    var input, filter, container, col, elMovie, elCat, i, txtValueMovie, txtValueCat;
+    input = document.getElementById("searchInput");
     filter = input.value.toUpperCase();
     container = document.getElementById("container");
     col = container.getElementsByClassName("col-md-6 col-lg-4 mb-5");
     for (i = 0; i < col.length; i++) {
-        a = col[i].getElementsByClassName("portfolio-item-caption-content text-center text-white")[0];
-        a1 = col[i].getElementsByClassName("portfolio-item-caption-content text-center text-black")[0];
-        txtValue = a.textContent || a.innerText;
-        txtValue1 = a1.textContent || a1.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1) {
+        elMovie = col[i].getElementsByClassName("portfolio-item-caption-content text-center text-white")[0];
+        elCat = col[i].getElementsByClassName("portfolio-item-caption-content text-center text-black")[0];
+        txtValueMovie = elMovie.textContent || elMovie.innerText;
+        txtValueCat = elCat.textContent || elCat.innerText;
+        if (txtValueMovie.toUpperCase().indexOf(filter) > -1 || txtValueCat.toUpperCase().indexOf(filter) > -1) {
             col[i].style.display = "";
         } else {
             col[i].style.display = "none";

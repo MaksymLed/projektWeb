@@ -24,14 +24,17 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
         <link href="css/box.css" rel="stylesheet" />
     </head>
     <body id="page-top">
+    <p class="nav-item"><a class="nav-link" >Welcome, <?php echo $_SESSION['username'] ?></p>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container px-4 px-lg-5">
+
                 <a class="navbar-brand" href="#page-top">Filmownia</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
+
                     <div>
-                        <input type="text" id="myInput" onkeyup="searchBar()" placeholder="Search for names.." title="Type in a name">
+                        <input type="text" id="myInput" onkeyup="searchBar()" placeholder="Search for title/catergory...">
                     </div>
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
 
@@ -39,12 +42,14 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Masthead-->
-        <h1><?php echo $_SESSION['username'] ?></h1>
+
         <header style="background-image:url('photos/tlo.jpg') ;" class="masthead">
             <div class="container px-4 px-lg-5 h-100">
                 <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
