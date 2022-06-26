@@ -230,8 +230,9 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                                 <h2 id="txt<?php echo $row['title']?>" onclick="editEl(this.id)" class="portfolio-modal-title text-secondary text-uppercase mb-0"><?php echo $row['title']?></h2>
                                 <input id="hid<?php echo $row['title']?>" type="hidden" name="newTitle" value="<?php echo $row['title']?>">
 
-                                <img id="img<?php echo $row['image']?>" onclick="editEl(this.id)" class="img-fluid rounded mb-5" src="photos/<?php echo $row['image']?>" alt="..." />
-                                <img id="slide" width="520" height="515">
+                                <img id="imj<?php echo $row['image']?>" onclick="editEl(this.id)" class="img-fluid rounded mb-5"   alt="..." />
+                                <br>
+                                    <h3 class="portfolio-modal-title text-secondary mb-0">Trailer:</h3>
                                     <iframe width="560" height="315" src="<?php echo $row['trailer']?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <br>
                                 Description:<p id="txt<?php echo $row['description']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['description'] ?></p>
