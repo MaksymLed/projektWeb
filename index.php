@@ -30,7 +30,11 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                 <a class="navbar-brand" href="#page-top">Filmownia</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <div>
+                        <input type="text" id="myInput" onkeyup="searchBar()" placeholder="Search for names.." title="Type in a name">
+                    </div>
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
+
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
@@ -106,7 +110,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
             </div>
         </section>
         <section class="page-section portfolio" id="portfolio">
-            <div class="container">
+            <div id="container" class="container">
                 <!-- Portfolio Section Heading-->
                 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Movies</h2>
                 <!-- Icon Divider-->
@@ -129,9 +133,11 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#<?php echo str_replace(' ', '', $row['title']); ?>">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                                <div class="portfolio-item-caption-content text-center text-white"><?php echo $row['title']; ?><i class="fas fa-plus fa-3x"></i></div>
+
                             </div>
                             <img class="img-fluid" src="photos/<?php echo $row['image']?>" alt="..." />
+                            <div class="portfolio-item-caption-content text-center text-black"><?php echo $row['category']; ?><i class="fas fa-plus fa-3x"></i></div>
                         </div>
                     </div>
 
@@ -274,7 +280,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
 
                                     <img id="txt<?php echo $row['image']?>" onclick="editEl(this.id)" class="img-fluid rounded mb-5" src="photos/<?php echo $row['image']?>" alt="..." />
 
-
+                                    <br>
                                     Description:<p id="txt<?php echo $row['description']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['description'] ?></p>
                                     <input id="hid<?php echo $row['description']?>" type="hidden" name="newDesc" value="<?php echo $row['description']?>">
 
