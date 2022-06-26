@@ -24,6 +24,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
         <link href="css/box.css" rel="stylesheet" />
     </head>
     <body id="page-top">
+
     <p class="nav-item"><a class="nav-link" >Welcome, <?php echo $_SESSION['username'] ?></p>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
@@ -114,6 +115,14 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                 </div>
             </div>
         </section>
+    <form action="index.php" method="post">
+        <label style="color:white" for="sorter">Sort by:</label>
+        <select name="sortBy">
+            <option value="release_date">Release Date</option>
+            <option value="rating">Rating</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Sort</button>
+    </form>
         <section class="page-section portfolio" id="portfolio">
             <div id="container" class="container">
                 <!-- Portfolio Section Heading-->
@@ -125,10 +134,18 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Portfolio Grid Items-->
+
+
                 <div class="row justify-content-center">
+
                     <!-- Portfolio Item 1-->
                     <?php
-                    $query = "SELECT * FROM movies ORDER BY id ASC";
+
+                    if ($_POST['sortBy']=="rating") {
+                        $query = "SELECT * FROM movies ORDER BY rating DESC";
+                    }else if ($_POST['sortBy']=="release_date"){
+                        $query = "SELECT * FROM movies ORDER BY release_date DESC";
+                    }
                     $result = mysqli_query($connect, $query);
                     if(mysqli_num_rows($result)>0){
                     while($row = mysqli_fetch_array($result)){
