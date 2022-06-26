@@ -11,15 +11,20 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn){
     die("Connection failed: " . mysqli_connect_error());
 }
+$toEdit = $_POST['toEdit'];
+$title = $_POST['newTitle'];
+$desc = $_POST['newDesc'];
+$rd = $_POST['newRD'];
+$director = $_POST['newDirector'];
+$ma = $_POST['newMA'];
+$link = $_POST['newLink'];
 
 
-$sql= "INSERT INTO `movies`( `title`, `description`, `image`, `category`, `review`, `release_date`, `director`, `major_actors`, `link`) VALUES ('".$_POST['title']."','".$_POST['description']."','".$_POST['image']."','".$_POST['category']."','".$_POST['review']."','".$_POST['release_date']."','".$_POST['director']."','".$_POST['major actors']."','".$_POST['link']."')";
-
-
+$sql= "UPDATE movies SET title='$title', description = '$desc', release_date = '$rd', director = '$director', major_actors = '$ma', link = '$link' WHERE title='$toEdit'";
 
 
 if (mysqli_query($conn,$sql)) {
-    echo "<h1 style='color:green'>Successfully added new movie</h1>";
+    echo "<h1 style='color:green'>Successfully updated the database</h1>";
     echo "<script>window.location.href='index.php';</script>";
 }
 else{

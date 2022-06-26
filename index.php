@@ -251,6 +251,11 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
         while($row = mysqli_fetch_array($result)){
 
         ?>
+        <script src="js/functions.js">
+
+
+
+        </script>
         <div class="portfolio-modal modal fade" id="<?php echo str_replace(' ', '', $row['title']); ?>" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -259,25 +264,37 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
-                                    <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0"><?php echo $row['title']?></h2>
-                                    <!-- Icon Divider-->
-                                    <div class="divider-custom">
-                                        <div class="divider-custom-line"></div>
-                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                        <div class="divider-custom-line"></div>
-                                    </div>
-                                    <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="photos/<?php echo $row['image']?>" alt="..." />
-                                    <!-- Portfolio Modal - Text-->
-                                    <p class="mb-4">Description: <?php echo $row['description'] ?></p>
-                                    <p class="mb-4">Release date: <?php echo $row['release_date'] ?></p>
-                                    <p class="mb-4">Director: <?php echo $row['director'] ?></p>
-                                    <p class="mb-4">Major actors: <?php echo $row['major_actors'] ?></p>
-                                    <h1><a href="<?php echo $row['link'] ?>">TMDB link</a></h1>
-                                    <form action="delete.php" method="post">
+                                <form action="edit.php" method="post">
+
+
+                                    <input type="hidden" name="toEdit" value="<?php echo $row['title']?>">
+
+                                    <h2 id="txt<?php echo $row['title']?>" onclick="editEl(this.id)" class="portfolio-modal-title text-secondary text-uppercase mb-0"><?php echo $row['title']?></h2>
+                                    <input id="hid<?php echo $row['title']?>" type="hidden" name="newTitle" value="<?php echo $row['title']?>">
+
+                                    <img id="txt<?php echo $row['image']?>" onclick="editEl(this.id)" class="img-fluid rounded mb-5" src="photos/<?php echo $row['image']?>" alt="..." />
+
+
+                                    Description:<p id="txt<?php echo $row['description']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['description'] ?></p>
+                                    <input id="hid<?php echo $row['description']?>" type="hidden" name="newDesc" value="<?php echo $row['description']?>">
+
+                                    Release date:<p id="txt<?php echo $row['release_date']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['release_date'] ?></p>
+                                    <input id="hid<?php echo $row['release_date']?>" type="hidden" name="newRD" value="<?php echo $row['release_date']?>">
+
+                                    Director:<p id="txt<?php echo $row['director']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['director'] ?></p>
+                                    <input id="hid<?php echo $row['director']?>" type="hidden" name="newDirector" value="<?php echo $row['director'] ?>">
+
+                                    Major actors:<p id="txt<?php echo $row['major_actors']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['major_actors'] ?></p>
+                                    <input id="hid<?php echo $row['major_actors']?>" type="hidden" name="newMA" value="<?php echo $row['major_actors']?>">
+
+                                    <h1 id="txt<?php echo $row['link']?>" onclick="editEl(this.id)"><a href="<?php echo $row['link'] ?>">TMDB link</a></h1>
+                                    <input id="hid<?php echo $row['link']?>" type="hidden" name="newLink" value="<?php echo $row['link']?>">
+
+                                    <button class="btn btn-primary" type="submit">Save changes</button>
+                                </form>
+                                    <form action="delete.php" method="post"" >
                                         <input name="deleteMovieId" type="hidden" value="<?php echo $row['title'] ?>">
-                                        <button class="btn btn-primary" data-bs-dismiss="modal">Delete</button>
+                                        <button type="submit" onclick="return verDelete()" class="btn btn-primary">Delete</button>
                                     </form>
 
                                     <button class="btn btn-primary" data-bs-dismiss="modal">
@@ -341,8 +358,8 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                                     <label>Link</label>
                                 </div>
                                 <button type="submit">Add New Movie</button>
-                            </form>
-                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
