@@ -188,7 +188,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                                 }
                             }
                             ?>
-                        </select><select>
+                        </select ><select name="rateNum">
                             <?php
                             for ($i=1; $i<=100; $i++)
                             {
@@ -198,8 +198,6 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                             }
                             ?>
                         </select><br><br>
-
-
 
                         <!-- Submit Button-->
                         <div class="d-grid"><button class="btn btn-primary" id="submitButton" type="submit">Rate</button></div>
