@@ -124,10 +124,6 @@ if(isset($_SESSION['username'])){
     </div>
 </section>
 
-
-
-
-
 <section class="page-section" id="contact">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -140,8 +136,6 @@ if(isset($_SESSION['username'])){
         <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
             <div class="col-lg-6">
                 <form action="addReview.php" method="post" id="contactForm" data-sb-form-api-token="API_TOKEN">
-
-
                     <label style="color:white" for="sorter">Pick a movie:</label>
                     <select name="forReview">
 
@@ -150,18 +144,14 @@ if(isset($_SESSION['username'])){
                         $result = mysqli_query($connect, $query);
                         if(mysqli_num_rows($result)>0){
                             while($row = mysqli_fetch_array($result)){
-
                                 ?>
-
                                 <option value="<?php echo $row['title'];?>"><?php echo $row['title'];?></option>
 
                                 <?php
                             }
                         }
-
                         ?>
                     </select><br><br>
-
 
                     <!-- Message input-->
                     <div class="form-floating mb-3">
@@ -172,6 +162,44 @@ if(isset($_SESSION['username'])){
 
                     <!-- Submit Button-->
                     <div class="d-grid"><button class="btn btn-primary" id="submitButton" type="submit">Comment</button></div>
+                </form>
+                <br><br><br>
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6 text-center">
+                        <h2 style="color:white" class="mt-0">Or rate a movie!</h2>
+                        <hr class="divider" />
+
+                    </div>
+                </div>
+                <form action="rateMovie.php" method="post" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                    <label style="color:white" for="sorter">Rate a movie:</label>
+                    <select name="forRate">
+
+                        <?php
+                        $query = "SELECT * FROM movies ORDER BY id ASC";
+                        $result = mysqli_query($connect, $query);
+                        if(mysqli_num_rows($result)>0){
+                            while($row = mysqli_fetch_array($result)){
+                                ?>
+                                <option value="<?php echo $row['title'];?>"><?php echo $row['title'];?></option>
+
+                                <?php
+                            }
+                        }
+                        ?>
+                    </select ><select name="rateNum">
+                        <?php
+                        for ($i=1; $i<=100; $i++)
+                        {
+                            ?>
+                            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                            <?php
+                        }
+                        ?>
+                    </select><br><br>
+
+                    <!-- Submit Button-->
+                    <div class="d-grid"><button class="btn btn-primary" id="submitButton" type="submit">Rate</button></div>
                 </form>
             </div>
         </div>
@@ -376,6 +404,7 @@ if(mysqli_num_rows($result)>0){
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
                             <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Statistics</h2>
+                            <br><br>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -397,7 +426,7 @@ if(mysqli_num_rows($result)>0){
                                 }
                             }
                             ?>
-                            <br>
+                            <br><br><br>
                             <button class="btn btn-primary" data-bs-dismiss="modal">
                                 <i class="fas fa-xmark fa-fw"></i>
                                 Close Window

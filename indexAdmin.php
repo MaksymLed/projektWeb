@@ -423,6 +423,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                             <div class="col-lg-8">
                                 <!-- Portfolio Modal - Title-->
                                 <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Statistics</h2>
+                                <br><br>
                                 <!-- Icon Divider-->
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
@@ -444,7 +445,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
                                     }
                                 }
                                 ?>
-                                <br>
+                                <br><br><br>
                                 <button class="btn btn-primary" data-bs-dismiss="modal">
                                     <i class="fas fa-xmark fa-fw"></i>
                                     Close Window
