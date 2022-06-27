@@ -15,8 +15,6 @@ if (!$conn){
 }
 $revDel = $_POST['deleteReviewId'];
 
-echo str_replace("nigga", "", "old,nigga,xd");
-
 $query = "SELECT review FROM movies";
 
 $result = mysqli_query($conn, $query);
@@ -41,8 +39,5 @@ else{
 }
 
 echo "<script>window.location.href='indexAdmin.php';</script>";
-
-
-
 
 ?>
