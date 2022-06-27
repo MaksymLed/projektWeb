@@ -25,7 +25,7 @@ $connect = mysqli_connect("localhost", "root", "", "projektdb");
 </head>
 <body id="page-top">
 <?php
-if(isset($_SESSION['username'])) {
+if(isset($_SESSION['username'])){
 ?>
 <p class="nav-item"><a class="nav-link" >Welcome <?php echo $_SESSION['username'] ?> !</p>
 <!-- Navigation bar-->
@@ -64,7 +64,7 @@ if(isset($_SESSION['username'])) {
 
 <section class="page-section portfolio" id="portfolio">
     <div id="container" class="container">
-        <form style="margin-left: 1000px;" action="indexUser.php" method="post">
+        <form style="margin-left: 1000px;" action="indexAdmin.php" method="post">
             <label style="color:white" for="sorter">Sort by:</label>
             <select name="sortBy">
                 <option value="release_date">Release Date</option>
@@ -119,15 +119,64 @@ if(isset($_SESSION['username'])) {
         </div>
     </div>
     <div style="text-align: center;  ">
-        <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMovie">Add Movie</button>
+        <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMovie">Add Movie</button><br><br>
+        <button  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#statisticsM">View Statistics</button>
     </div>
 </section>
-<script>
 
 
 
-</script>
 
+
+<section class="page-section" id="contact">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6 text-center">
+                <h2 style="color:white" class="mt-0">Leave a review!</h2>
+                <hr class="divider" />
+
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+            <div class="col-lg-6">
+                <form action="addReview.php" method="post" id="contactForm" data-sb-form-api-token="API_TOKEN">
+
+
+                    <label style="color:white" for="sorter">Pick a movie:</label>
+                    <select name="forReview">
+
+                        <?php
+                        $query = "SELECT * FROM movies ORDER BY id ASC";
+                        $result = mysqli_query($connect, $query);
+                        if(mysqli_num_rows($result)>0){
+                            while($row = mysqli_fetch_array($result)){
+
+                                ?>
+
+                                <option value="<?php echo $row['title'];?>"><?php echo $row['title'];?></option>
+
+                                <?php
+                            }
+                        }
+
+                        ?>
+                    </select><br><br>
+
+
+                    <!-- Message input-->
+                    <div class="form-floating mb-3">
+                        <textarea name="newReview" class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                        <label for="message">Review</label>
+                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                    </div>
+
+                    <!-- Submit Button-->
+                    <div class="d-grid"><button class="btn btn-primary" id="submitButton" type="submit">Comment</button></div>
+                </form>
+            </div>
+        </div>
+
+</section>
 
 <!-- Contact-->
 <section class="page-section" id="contact">
@@ -167,25 +216,10 @@ if(isset($_SESSION['username'])) {
                         <label for="message">Message</label>
                         <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                     </div>
-                    <!-- Submit success message-->
-                    <!---->
-                    <!-- This is what your users will see when the form-->
-                    <!-- has successfully submitted-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center mb-3">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div>
-                    </div>
-                    <!-- Submit error message-->
-                    <!---->
-                    <!-- This is what your users will see when there is-->
-                    <!-- an error submitting the form-->
+
                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                     <!-- Submit Button-->
-                    <div class="d-grid"><button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Submit</button></div>
+                    <div class="d-grid"><button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send Message</button></div>
                 </form>
             </div>
         </div>
@@ -222,41 +256,30 @@ if(mysqli_num_rows($result)>0){
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
-                                    <form action="edit.php" method="post">
-
 
                                         <input type="hidden" name="toEdit" value="<?php echo $row['title']?>">
 
-                                        <h2 id="txt<?php echo $row['title']?>" onclick="editEl(this.id)" class="portfolio-modal-title text-secondary text-uppercase mb-0"><?php echo $row['title']?></h2>
-                                        <input id="hid<?php echo $row['title']?>" type="hidden" name="newTitle" value="<?php echo $row['title']?>">
+                                        <h2 id="txt<?php echo $row['title']?>" class="portfolio-modal-title text-secondary text-uppercase mb-0"><?php echo $row['title']?></h2>
 
-                                        <img id="imj<?php echo $row['image']?>" onclick="editEl(this.id)" class="img-fluid rounded mb-5"   alt="..." />
+                                        <img id="imj<?php echo $row['image']?>" class="img-fluid rounded mb-5"   alt="..." />
                                         <br>
-                                        <h3 class="portfolio-modal-title text-secondary mb-0">Trailer:</h3>
+                                        <h3 class="portfolio-modal-title text-secondary mb-0">Trailer</h3>
                                         <iframe width="560" height="315" src="<?php echo $row['trailer']?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                         <br>
-                                        Description:<p id="txt<?php echo $row['description']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['description'] ?></p>
-                                        <input id="hid<?php echo $row['description']?>" type="hidden" name="newDesc" value="<?php echo $row['description']?>">
+                                        <h5>Description:</h5><h5 id="txt<?php echo $row['description']?>"> <?php echo $row['description'] ?></h5>
 
-                                        Release date:<p id="txt<?php echo $row['release_date']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['release_date'] ?></p>
-                                        <input id="hid<?php echo $row['release_date']?>" type="hidden" name="newRD" value="<?php echo $row['release_date']?>">
+                                        Release date:<p id="txt<?php echo $row['release_date']?>" class="mb-4"> <?php echo $row['release_date'] ?></p>
 
-                                        Director:<p id="txt<?php echo $row['director']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['director'] ?></p>
-                                        <input id="hid<?php echo $row['director']?>" type="hidden" name="newDirector" value="<?php echo $row['director'] ?>">
+                                        Director:<p id="txt<?php echo $row['director']?>"  class="mb-4"> <?php echo $row['director'] ?></p>
 
-                                        Major actors:<p id="txt<?php echo $row['major_actors']?>" onclick="editEl(this.id)" class="mb-4"> <?php echo $row['major_actors'] ?></p>
-                                        <input id="hid<?php echo $row['major_actors']?>" type="hidden" name="newMA" value="<?php echo $row['major_actors']?>">
+                                        Major actors:<p id="txt<?php echo $row['major_actors']?>"  class="mb-4"> <?php echo $row['major_actors'] ?></p>
 
-                                        <h1 id="txt<?php echo $row['link']?>" onclick="editEl(this.id)"><a href="<?php echo $row['link'] ?>">TMDB link</a></h1>
-                                        <input id="hid<?php echo $row['link']?>" type="hidden" name="newLink" value="<?php echo $row['link']?>">
+                                        <h6 id="txt<?php echo $row['link']?>"><a href="<?php echo $row['link'] ?>">TMDB link</a></h6>
 
-                                        <button class="btn btn-primary" type="submit">Save changes</button>
+                                        Rating:<p id="txt<?php echo $row['rating']?>" class="mb-4"> <?php echo $row['rating'] ?>/100.00</p> <br>
 
-                                    </form>
-                                    <form action="delete.php" method="post"" >
-                                    <input name="deleteMovieId" type="hidden" value="<?php echo $row['title'] ?>">
-                                    <button type="submit" onclick="return verDelete()" class="btn btn-primary">Delete</button>
-                                    </form>
+                                        <a style="color:burlywood; text-decoration: underline" data-bs-toggle="modal" data-bs-target="#<?php echo str_replace(' ', '', $row['title'])."r"; ?>">Reviews</a><br><br>
+
                                     <button class="btn btn-primary" data-bs-dismiss="modal"><i class="fas fa-xmark fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
@@ -269,7 +292,123 @@ if(mysqli_num_rows($result)>0){
     }
 }
 ?>
-<button onclick="test()">AAAAA</button>
+
+<?php
+$query = "SELECT * FROM movies ORDER BY id ASC";
+$result = mysqli_query($connect, $query);
+if(mysqli_num_rows($result)>0){
+    while($row = mysqli_fetch_array($result)){
+        $revs = explode(',',  $row['review']);
+        $length = count($revs);
+
+        ?>
+
+
+        <!--Reviews MODAL-->
+        <div class="modal" id="<?php echo str_replace(' ', '', $row['title'])."r"; ?>" tabindex="-1" role="dialog" aria-labelledby="rew" aria-hidden= "true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Reviews by users</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <?php
+                                    for ($i = 0; $i < $length; $i++) {
+                                        ?>
+                                        <div class='card card-white post'>
+                                            <div class='post-heading'>
+                                                <div class='float-left image'>
+                                                    <img src='http://bootdey.com/img/Content/user_1.jpg' class='img-circle avatar' alt='user profile image'>
+                                                </div>
+                                                <div class='float-left meta'>
+                                                    <div class='title h5'>
+                                                        <a href='#'><b>Ryan Haywood</b></a>
+                                                        made a post.
+                                                    </div>
+                                                    <h6 class='text-muted time'>Yesterday</h6>
+                                                </div>
+                                            </div>
+
+                                            <div class='post-description'>
+
+                                                <p><?php echo $revs[$i]; ?></p>
+
+                                            </div>
+
+                                        </div>
+
+                                    <?php }?>
+                                    <br>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        Close Window
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+
+    }
+}
+?>
+
+<!--STATISTICS MODAL-->
+<div class="modal" id="statisticsM" tabindex="-1" role="dialog" aria-labelledby="statisticsM" aria-hidden= "true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!-- Portfolio Modal - Title-->
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Statistics</h2>
+                            <!-- Icon Divider-->
+                            <div class="divider-custom">
+                                <div class="divider-custom-line"></div>
+                                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                <div class="divider-custom-line"></div>
+                            </div>
+                            <?php
+                            $query = "SELECT * FROM movies ORDER BY rating DESC";
+                            $result = mysqli_query($connect, $query);
+                            if(mysqli_num_rows($result)>0){
+                                while($row = mysqli_fetch_array($result)){
+
+                                    ?>
+                                    Top Movie: <?php echo $row['title']?><br>
+                                    Best Actor: <?php $myArray = explode(',',  $row['major_actors']); echo $myArray[0]?>
+
+                                    <?php
+                                    break;
+                                }
+                            }
+                            ?>
+                            <br>
+                            <button class="btn btn-primary" data-bs-dismiss="modal">
+                                <i class="fas fa-xmark fa-fw"></i>
+                                Close Window
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!--ADD MOVIE MODAL-->
 <div class="modal" id="addMovie" tabindex="-1" role="dialog" aria-labelledby="addMovie" aria-hidden= "true">
     <div class="modal-dialog modal-xl">

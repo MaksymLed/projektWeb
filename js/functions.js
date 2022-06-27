@@ -7,7 +7,7 @@ function editEl(id){
 }
 
 function verDelete(){
-    let x = confirm("Are you sure you want to delete this movie ?");
+    let x = confirm("Are you sure you want to delete this?");
 
     if(x) {
 
@@ -41,7 +41,7 @@ var time = 3000;
 function changeImg(){
 
     const elements = document.querySelectorAll(`[id^="imj"]`);
-    
+
     for (let j = 0; j < elements.length; j++) {
         document.getElementById(elements[j].id).src = 'slides/' + elements[j].id.slice(3, -4) + '/' + i.toString() + '.png';
     }
